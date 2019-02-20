@@ -9,16 +9,5 @@ before_install:
 script:
     - docker run gertvermeer/react-test npm test -- --coverage
     
-after_success:
-    - docker build -t gertvermeer/multi_client ./client
-    - docker build -t gertvermeer/multi_nginx ./nginx
-    - docker build -t gertvermeer/multi_server ./server
-    - docker build -t gertvermeer/multi_worker ./worker
 
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
-- docker push gertvermeer/multi_client
-- docker push gertvermeer/multi_nginx
-- docker push gertvermeer/multi_server
-- docker push gertvermeer/multi_worker
     
