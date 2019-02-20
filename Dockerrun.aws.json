@@ -1,0 +1,35 @@
+{
+    "AWSEBDockerrunVersion" : 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "gertvermeer/multi_client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "gertvermeer/multi_server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "gertvermeer/multi_worker",
+            "hostname" : "worker",
+            "essential" : false
+        },
+        {
+            "name": "nginx",
+            "image": "gertvermeer/multi_nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client","server"]
+        }
+    ]
+}
